@@ -165,7 +165,6 @@ console.log(cocktails)
           </div>
         })}
       </article>
-      <SingleCocktail/>
     </section>
   )
 }
