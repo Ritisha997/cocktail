@@ -27,24 +27,30 @@ React.useEffect(()=>{
 },[])
 
   return (
-      <section className='center-btn'>
-        <div className='bg-img'>
-          <img className='logo1' src={logo2}/>
-          <img className='logo2' src={logo}/>
+		<section className="center-btn">
+			<div className="bg-img">
+				<img className="logo1" src={logo2} />
+				<img className="logo2" src={logo} />
+			</div>
+			<Navbar />
+      <div className='iterator2'>
+			<div className="iterator">
+				{feature.map((item) => {
+					return (
+						<div key={item.idDrink}>
+							<img className="img-drink" src={item.strDrinkThumb} />
+							<p className="para">{item.strDrink}</p>
+							<p className="para">{item.strGlass}</p>
+						</div>
+					);
+				})}
+<Link className="btn" to="/CocktailList">
+					get cocktails
+				</Link>
         </div>
-       <Navbar/>
-        <div className='iterator'>
-          {feature.map(item=>{
-            return <div key={item.idDrink}>
-            <img className='img-drink' src={item.strDrinkThumb}/>
-            <p className='para'>{item.strDrink}</p>
-            <p className='para'>{item.strGlass}</p>
-            </div>
-          })}
-        </div>
-       <Link className='btn' to='/CocktailList'>get cocktails</Link>
-      </section>
-  )
+			</div>
+		</section>
+	);
 }
 
 export default Home

@@ -11,6 +11,7 @@ const CocktailList = () => {
   const url ='https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
 const [cocktail, setCocktail] = useState([]);
 const [cocktails, setCocktails] = useState([]);
+const [newCategory, setNewCategory] = useState([])
 const [categories, setCategories] = useState('all');
 // const [category, setCategory] = useState([]);
 const [loading,setLoading] = useState(false);
@@ -64,19 +65,19 @@ const FetchDrinks = async() =>{
     }
 
 }
-console.log(cocktail)
+// console.log(cocktail)
 // const allCategories = ['all', ...new Set(cocktail.map((item) => item.category))];
 // console.log(allCategories)
 
-let newOne = [cocktail]
-newOne = cocktail.filter(item =>{
-  if(item){
-   return item.name.toLowerCase().includes(searchTerm.toLowerCase())
-  } 
+// let newOne = [cocktail]
+// newOne = cocktail.filter(item =>{
+//   if(item){
+//    return item.name.toLowerCase().includes(searchTerm.toLowerCase())
+//   } 
 
-})
+// })
 // console.log(categories)
-
+let newOne = [cocktail];
   newOne = cocktail.filter(item =>{
     console.log(item.category)
     if(categories !== 'all'){
@@ -85,6 +86,12 @@ newOne = cocktail.filter(item =>{
     }
   }) 
 
+  let newState = [cocktail];
+	newState = cocktail.filter((item) => {
+		if (item) {
+			return item.name.toLowerCase().includes(searchTerm.toLowerCase());
+		}
+	});
 // console.log(filterItem)
 // newOne = cocktail.filter(item => {
 //   console.log(item)
@@ -94,20 +101,22 @@ newOne = cocktail.filter(item =>{
   // React.useEffect(() => {
   //   searchValue.current.focus()
   // }, [])
-  console.log(newOne)
+  
 React.useEffect(()=>{
   FetchDrinks();
   
 },[])
-
+console.log(newOne);
 React.useEffect(()=>{
-  setCocktails(newOne)
+  setCocktails(newState)
 },[searchTerm,categories])
-
+console.log(newOne);
+console.log(newCategory)
+// setNewCategory(newOne)
 // setCategories(allCategories)
-// React.useEffect(()=>{
-//   setCategories(allCategories)
-// },[])
+React.useEffect(()=>{
+   setNewCategory(newOne);
+},[categories])
 if(loading){
   return <Loading/>
 }
